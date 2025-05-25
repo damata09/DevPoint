@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevPoints - Plataforma para Devs</title>
+    <meta name="description" content="Conquiste pontos e reconhecimento na comunidade dev">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    
+    <!-- Fontes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* Variáveis CSS - Tema Tecnológico */
+        :root {
+            --primary: #00f0ff;     /* Ciano tecnológico */
+            --primary-dark: #00a8b5;
+            --secondary: #7928ca;    /* Roxo elétrico */
+            --accent: #ff2d75;      /* Rosa neon */
+            --dark: #0a0e17;        /* Fundo escuro */
+            --darker: #05080f;      /* Mais escuro */
+            --light: #e2f1ff;       /* Texto claro */
+            --gray: #5d6c89;        /* Cinza azulado */
+            --success: #2ecc71;
+            
+            --neon-glow: 0 0 10px rgba(0, 240, 255, 0.7);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--dark);
+            color: var(--light);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        code, .mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* Layout Principal */
+        .app-container {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Header Tecnológico */
+        .header {
+            background: var(--darker);
+            border-bottom: 1px solid rgba(0, 240, 255, 0.1);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            text-shadow: var(--neon-glow);
+        }
+
+        .logo span {
+            color: var(--accent);
+            margin-left: 0.5rem;
+        }
+
+        /* Conteúdo Principal */
+        .main-content {
+            flex: 1;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        /* Cards Hightech */
+        .card {
+            background: linear-gradient(145deg, #0f1522, #0a0e17);
+            border-radius: 8px;
+            border: 1px solid rgba(0, 240, 255, 0.1);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            border-color: rgba(0, 240, 255, 0.3);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Botões Tecnológicos */
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.8rem;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            text-align: center;
+            letter-spacing: 0.5px;
+            position: relative;
+            overflow: hidden;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: var(--darker);
+            font-weight: 700;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            box-shadow: var(--neon-glow);
+            transform: translateY(-2px);
+        }
+
+        /* Loading Animado */
+        .app-loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: var(--dark);
+            z-index: 9999;
+            transition: opacity 0.5s ease-out;
+        }
+
+        .app-loading.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loading-spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid rgba(0, 240, 255, 0.1);
+            border-radius: 50%;
+            border-top-color: var(--primary);
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+            box-shadow: var(--neon-glow);
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .loading-logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--primary);
+            text-shadow: var(--neon-glow);
+        }
+
+        .loading-text {
+            color: var(--gray);
+            font-size: 1rem;
+        }
+
+        /* Página Inicial Tecnológica */
+        .hero {
+            text-align: center;
+            padding: 4rem 0;
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+            text-shadow: var(--neon-glow);
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto 3rem;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .feature-card {
+            background: linear-gradient(145deg, #0f1522, #0a0e17);
+            border-radius: 8px;
+            border: 1px solid rgba(0, 240, 255, 0.1);
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0,240,255,0.1) 0%, rgba(0,240,255,0) 70%);
+            transform: rotate(45deg);
+            transition: all 0.5s ease;
+            opacity: 0;
+        }
+
+        .feature-card:hover {
+            border-color: rgba(0, 240, 255, 0.3);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .feature-card:hover::before {
+            opacity: 1;
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            text-shadow: var(--neon-glow);
+        }
+
+        .feature-card h3 {
+            margin-bottom: 1rem;
+            color: var(--light);
+            font-size: 1.3rem;
+        }
+
+        .feature-card p {
+            color: var(--gray);
+            font-size: 1rem;
+        }
+
+        /* Efeitos de Neon */
+        .neon-text {
+            text-shadow: 0 0 8px var(--primary);
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .header {
+                padding: 1rem;
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .features {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+  /* Estilos globais para a HomePage - CORRIGIDOS */
+  .home-page {
+    overflow-x: hidden;
+  }
+
+  .hero-section {
+    background: linear-gradient(135deg, #0d6efd 0%, #0b5ed7 100%);
+  }
+
+  .icon-wrapper {
+    transition: all 0.3s ease;
+  }
+
+  .feature-card:hover .icon-wrapper {
+    background-color: #0d6efd !important;
+    color: white !important;
+    transform: scale(1.1);
+  }
+
+  /* Responsividade */
+  @media (max-width: 768px) {
+    .hero-section .display-4 {
+      font-size: 2.5rem;
+    }
+  }
+
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+  
+  .hover-grow {
+    transition: transform 0.3s ease;
+  }
+  
+  .hover-grow:hover {
+    transform: translateY(-3px);
+  }
+  
+  .feature-card {
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+  }
+  
+  .feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2) !important;
+  }
+
+</style>
+
+    
+</head>
+<body>
+    <!-- Tela de Carregamento -->
+    <div class="app-loading" id="appLoading">
+        <div class="loading-spinner"></div>
+        <div class="loading-logo"><span class="neon-text">Dev</span><span style="color: var(--accent)">Points</span></div>
+        <div class="loading-text">Inicializando sistema...</div>
+    </div>
+
+    <!-- Conteúdo Inicial -->
+    <div id="root">
+        <div class="app-container">
+            <header class="header">
+                <div class="logo"><span class="neon-text">Dev</span><span>Points</span></div>
+                <nav>
+                    <a href="/login" class="btn btn-primary">
+                        <i class="fas fa-sign-in-alt"></i> Acessar
+                    </a>
+                </nav>
+            </header>
+            
+            <main class="main-content">
+                <section class="hero">
+                    <h1>Transforme <span class="neon-text">código</span> em <span style="color: var(--accent)">recompensas</span></h1>
+                    <p class="mono">// Junte-se à comunidade de desenvolvedores e ganhe reconhecimento por suas contribuições</p>
+                    <a href="/register" class="btn btn-primary">
+                        <i class="fas fa-user-plus"></i> Criar conta
+                    </a>
+                </section>
+                
+                <section class="features">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <h3>Contribuições</h3>
+                        <p>Ganhe pontos por contribuir com projetos open-source e resolver issues.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <h3>Tecnologia</h3>
+                        <p>Conquiste badges exclusivas em diferentes tecnologias e frameworks.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-network-wired"></i>
+                        </div>
+                        <h3>Networking</h3>
+                        <p>Conecte-se com outros desenvolvedores e mostre seu portfólio.</p>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <script type="module" src="/src/main.jsx"></script>
+    
+    <script>
+        // Esconde o loading quando tudo estiver carregado
+        window.addEventListener('DOMContentLoaded', function() {
+            setTimeout(function() {
+                const loading = document.getElementById('appLoading');
+                if (loading) {
+                    loading.classList.add('hidden');
+                    
+                    // Remove completamente após a animação
+                    setTimeout(() => {
+                        loading.remove();
+                    }, 500);
+                }
+            }, 1500);
+        });
+    </script>
+</body>
+</html>
